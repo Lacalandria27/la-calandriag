@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <title>La Calandria - Indumentaria Gaucha Femenina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@100;300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-crema: #F8F4E9;
+            --color-tierra: #A87C5D;
+            --color-oscuro: #2A2418;
+            --color-acero: #C4C4C4;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-oscuro);
+            background-color: var(--color-crema);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            padding: 2rem 0;
+            z-index: 100;
+            background-color: transparent;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background-color: rgba(248, 244, 233, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--color-oscuro);
+            text-decoration: none;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 2rem;
+        }
+
+        nav a {
+            color: var(--color-oscuro);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--color-tierra);
+            transition: var(--transition);
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.9;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            color: var(--color-oscuro);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: 1px solid var(--color-oscuro);
+            color: var(--color-oscuro);
+            text-decoration: none;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .hero-btn:hover {
+            background-color: var(--color-oscuro);
+            color: var(--color-crema);
+        }
+
+        /* Collections */
+        .section {
+            padding: 8rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 1px;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--color-tierra);
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            color: var(--color-tierra);
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .collection-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collection-card img {
+            transition: var(--transition);
+        }
+
+        .collection-card:hover img {
+            transform: scale(1.02);
+        }
+
+        .collection-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+            color: white;
+        }
+
+        .collection-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .collection-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* About */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-oscuro);
+            color: var(--color-crema);
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+
+        .footer-links {
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--color-crema);
+            margin: 0 0.5rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-tierra);
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 2rem;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">La Calandria</a>
+            <nav>
+                <ul>
+                    <li><a href="#colecciones">Colecciones</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#nosotros">Nosotras</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5707c9b2-ed60-4a7b-bd2f-3f252ed6f340.png" alt="Mujer elegante vistiendo indumentaria gaucha moderna, con poncho tejido en tonos tierra y sombrero negro, caminando por campo abierto al atardecer" class="hero-image">
+        <div class="hero-content" contenteditable="true">
+            <h1>La Calandria</h1>
+            <p>Indumentaria gaucha femenina de alta calidad</p>
+            <a href="#colecciones" class="hero-btn">Explorar Colección</a>
+        </div>
+    </section>
+
+    <section class="section" id="colecciones">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Colecciones</h2>
+                <p class="section-subtitle">Piezas hechas a mano con materiales nobles</p>
+            </div>
+            <div class="collections-grid">
+                <div class="collection-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/93cf1aa3-8bcd-42e2-949e-6ad074962255.png" alt="Poncho femenino tejido en lana merino, colores tierra con detalles en bordados tradicionales, colgando de gancho de madera" style="outline: rgb(0, 0, 0) dotted 3px; outline-offset: 1px;">
+                    <div class="collection-overlay">
+                        <h3>Ponchos Artesanales</h3>
+                        <p>Hechos a mano con lana merino</p>
+                    </div>
+                </div>
+                <div class="collection-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fb2a516c-46d9-4068-8479-a33c36324f42.png" alt="Bolsos de cuero repujado con diseños florales, tonos marrones naturales, mostrados sobre mesa de madera rústica">
+                    <div class="collection-overlay">
+                        <h3>Bolsos</h3>
+                        <p>Cuero artesanal</p>
+                    </div>
+                </div>
+                <div class="collection-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4d849e1f-8a8d-42d3-ad60-5a049ed2b2ce.png" alt="Conjunto de accesorios gauchos: cinturones de cuero, vinchas con monedas y pañuelos de seda en tonos suaves. Tambien agrega un mate de alpaca rústico">
+                    <div class="collection-overlay">
+                        <h3>Accesorios</h3>
+                        <p>Detalles que marcan la diferencia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="productos">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Productos Destacados</h2>
+                <p class="section-subtitle">Selección de nuestras piezas más exclusivas</p>
+            </div>
+            <div class="collections-grid">
+                <div class="collection-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/148b55ae-e26b-42a6-8ce8-37e85e76a601.png" alt="Chaleco de cuero suave para mujer con bordados florales , colgado en perchero negro minimalista">
+                    <div class="collection-overlay">
+                        <h3>Chaleco de Cuero</h3>
+                        <p>Ajuste perfecto</p>
+                    </div>
+                </div>
+                <div class="collection-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4525a756-7961-4be5-ab19-e9efd760b2bf.png" alt="Sombrero gaucho negro con cinta bordada en plata y detalles de trenzado fino, sobre fondo blanco">
+                    <div class="collection-overlay">
+                        <h3>Sombreros</h3>
+                        <p>Elegancia clásica</p>
+                    </div>
+                </div>
+                <div class="collection-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2a2fd396-f7ed-42b9-a2e4-dc24916b355f.png" alt="Bombacha de campo gaucho que este bordada con flores, posadas sobre madera rústica">
+                    <div class="collection-overlay">
+                        <h3>Botas</h3>
+                        <p>Hechas a medida</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="nosotros">
+        <div class="container">
+            <div class="about">
+                <div class="about-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0e3e9490-7a30-45a3-94e7-cd35b9c315c0.png" alt="Retrato de mujer artesana trabajando cuero en taller luminoso, rodeada de herramientas tradicionales y tejidos">
+                </div>
+                <div class="about-content" contenteditable="true">
+                    <h2>Tu Título</h2>
+                    <p>Tu primera descripción acerca de tu negocio.</p>
+                    <p>Detalles adicionales sobre tus productos y filosofía.</p>
+                    <p>Tu compromiso con los clientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="footer-logo">La Calandria</a>
+                <div class="footer-links">
+                    <a href="https://instagram.com/lacalandriagaucha">Instagram</a>
+                    <a href="https://wa.me/5493563400840">WhatsApp</a>
+                    <a href="mailto:info@lacalandria.com">Correo</a>
+                </div>
+                <p>Córdoba, Argentina</p>
+                <p class="copyright">© <span id="current-year">2024</span> La Calandria. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fixed Header on Scroll
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Auto-update copyright year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
